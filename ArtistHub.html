@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Hub </title>
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+       
+        :root {
+            --primary-bg: #f9fafb; 
+            --secondary-bg: #ffffff;
+            --dark-bg: #111827; 
+            --primary-text: #1f2937;
+            --secondary-text: #6b7280;
+            --light-text: #f9fafb;
+            --accent-color: #4f46e5; 
+            --accent-hover: #4338ca;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --border-radius: 0.5rem; /* 8px */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 {
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h1 { font-size: 3.5rem; font-weight: 900; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; }
+        h3 { font-size: 1.25rem; }
+
+        p {
+            color: var(--secondary-text);
+            margin-bottom: 1rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--secondary-text);
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--light-text);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-text);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-bg);
+        }
+
+        /* --- Header --- */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--primary-text);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            background-color: var(--secondary-bg);
+            padding-top: 6rem;
+            text-align: center;
+        }
+
+        #hero .container {
+            max-width: 800px;
+        }
+        
+        #hero h1 {
+            background: linear-gradient(45deg, var(--accent-color), #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        #hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .hero-image {
+            margin-top: 4rem;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* --- Features Section --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 64px;
+            height: 64px;
+            background-color: #eef2ff; 
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--accent-color);
+        }
+
+        /* --- Showcase Section --- */
+        #showcase {
+            background-color: var(--secondary-bg);
+        }
+
+        .showcase-grid {
+            columns: 3;
+            column-gap: 1.5rem;
+        }
+
+        .showcase-item {
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease-in-out;
+        }
+        
+        .showcase-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- CTA Section --- */
+        #cta {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            text-align: center;
+            border-radius: var(--border-radius);
+        }
+        
+        #cta h2 {
+           color: var(--light-text);
+           font-size: 2.25rem;
+        }
+        
+        #cta .section-subtitle {
+            color: #d1d5db; /* Cool gray */
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- Footer --- */
+        .main-footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .main-footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.75rem; }
+            h2 { font-size: 2rem; }
+            section { padding: 4rem 0; }
+
+            .nav-links { display: none; } 
+            .hero-buttons { flex-direction: column; }
+            
+            .showcase-grid { columns: 2; }
+        }
+
+        @media (max-width: 480px) {
+            .showcase-grid { columns: 1; }
+            .main-footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links { margin-top: 1rem; }
+            .footer-links a { margin: 0 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container navbar">
+            <a href="#" class="logo">Artist Hub</a>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#showcase">Showcase</a>
+                <a href="#cta">Join</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Unite. Create. Inspire.</h1>
+                <p>The ultimate community for artists to showcase their work, connect with peers, and find their next big opportunity.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Join the Community</a>
+                    <a href="#showcase" class="btn btn-secondary">Explore Art</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://placehold.co/1200x600/e2e8f0/4a5568?text=Creative+Showcase" alt="A vibrant collage of various art styles">
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Why Artist Hub?</h2>
+                <p class="section-subtitle">Everything you need to grow as an artist, all in one place.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                        </div>
+                        <h3>Stunning Portfolios</h3>
+                        <p>Create a beautiful, professional portfolio in minutes. No coding required. Just upload your art and let us handle the rest.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.28a4.5 4.5 0 00-1.397 8.93c-2.623-1.01-4.06-3.8-4.06-6.89a8.968 8.968 0 016.34-8.627c1.17-.333 2.39-.533 3.66-.533s2.49.2 3.66.533a8.968 8.968 0 016.34 8.627c0 3.09-1.437 5.88-4.06 6.89a4.5 4.5 0 00-1.397-8.931z" /></svg>
+                        </div>
+                        <h3>Connect & Collaborate</h3>
+                        <p>Join a thriving global network of creators. Share ideas, get feedback, and find partners for your next creative project.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.75A.75.75 0 013 4.5h.75m0 0a9 9 0 0118 0m-9 7.5h9" /></svg>
+                        </div>
+                        <h3>Sell Your Work</h3>
+                        <p>Easily list your art for sale in our marketplace. We provide the tools to manage prints, originals, and digital downloads securely.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase">
+            <div class="container">
+                <h2>Inspiration Awaits</h2>
+                <p class="section-subtitle">Discover incredible work from talented artists in the Artist Hub community.</p>
+                <div class="showcase-grid">
+                    <div class="showcase-item"><img src="https://placehold.co/400x600/a78bfa/ffffff?text=Abstract" alt="Abstract Art"></div>
+                    <div class="showcase-item"><img src="https://placehold.co/400x400/f472b6/ffffff?text=Portrait" alt="Portrait Art"></div>
+                    <div class="showcase-item"><img src="https://placehold.co/400x500/60a5fa/ffffff?text=Landscape" alt="Landscape Art"></div>
+                    <div class="showcase-item"><img src="https://placehold.co/400x450/34d399/ffffff?text=Sculpture" alt="Sculpture"></div>
+                    <div class="showcase-item"><img src="https://placehold.co/400x550/fbbf24/ffffff?text=Digital" alt="Digital Art"></div>
+                    <div class="showcase-item"><img src="https://placehold.co/400x350/f87171/ffffff?text=Street+Art" alt="Street Art"></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div id="cta">
+                    <h2>Ready to Elevate Your Art?</h2>
+                    <p class="section-subtitle">Join thousands of artists who are taking their passion to the next level. Your first portfolio is free, forever.</p>
+                    <a href="#" class="btn btn-primary">Start Your Free Portfolio</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Artist Hub. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
